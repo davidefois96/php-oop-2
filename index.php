@@ -7,7 +7,8 @@ require_once __DIR__ . '/Model/KennelProduct.php';
 require_once __DIR__ . '/data/products.php';
 
 
-
+$foods = array_filter($products, fn ($product) => get_class($product)== 'FoodProduct');
+$Kennels = array_filter($products, fn ($product) => get_class($product)== 'KennelProduct');
 
 
 ?>
@@ -25,7 +26,7 @@ require_once __DIR__ . '/data/products.php';
 </head>
 <body class="bg-warning-subtle text-secondary">
 
-<h1 class=" text-center mt-3 mb-5 text-warning">PHP-OOP-2</h1>
+<h2 class=" text-center mt-3 mb-5 text-warning">ALL THE PRODUCTS</h2>
 
 <div class="container">
   <div class="row row-cols-2">
@@ -41,9 +42,9 @@ require_once __DIR__ . '/data/products.php';
 
           <div class="card-body text-center ">
 
-            <h2 class="mb-4"><?php echo $product->name; ?></h2>
+            <h2 class="mb-4"><?php echo $product->getName(); ?></h2>
 
-            <p>Price: <?php echo $product->price; ?></p>
+            <p>Price: <?php echo $product->price; ?> $ </p>
             
             <?php if ($product instanceof FoodProduct) : ?>
 
@@ -53,7 +54,7 @@ require_once __DIR__ . '/data/products.php';
 
             <?php elseif ($product instanceof KennelProduct) : ?>
 
-              <p class="mb-4">Dimensions: <?php echo implode(' x ', $product->dimensions); ?></p>
+              <p class="mb-4">Dimensions: <?php echo implode(' x ', $product->dimensions); ?> cm</p>
 
             <?php endif; ?>
 
@@ -61,13 +62,103 @@ require_once __DIR__ . '/data/products.php';
 
             <p class="me-1">Category:</p>
 
-            <img class="d-block logoBox" src="<?php echo $product->category_logo; ?>" alt="<?php echo $product->category; ?>">
+            <img class="d-block logoBox" src="<?php echo $product->category_logo; ?>" alt="<?php echo $product->category_name; ?>">
 
             </div>
           </div>
         </div>
       </div>
     <?php endforeach; ?>
+
+
+  </div>
+</div>
+
+<h2 class=" text-center my-5 text-warning">FOODS</h2>
+
+
+<div class="container">
+  <div class="row row-cols-2">
+
+    <?php foreach($foods as $product) : ?>
+
+      <div class="col d-flex  justify-content-center ">
+
+        <div class="card mb-5 w-50 bg-warning text-white ">
+
+          <img class="p-2" src="<?php echo $product->poster; ?>" class="card-img-top" alt="Category Logo">
+
+          <div class="card-body text-center ">
+
+            <h2 class="mb-4"><?php echo $product->getName(); ?></h2>
+
+            <p>Price: <?php echo $product->price; ?> $ </p>
+            
+            
+
+            <p>Ingredients: <?php echo implode(', ', $product->ingredients); ?></p>
+
+            <p class="mb-4">Weight: <?php echo $product->weight; ?> kg</p>
+
+            
+
+            
+            <div class="d-flex flex-column align-items-center ">
+
+            <p class="me-1">Category:</p>
+
+            <img class="d-block logoBox" src="<?php echo $product->category_logo; ?>" alt="<?php echo $product->category_name; ?>">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php endforeach; ?>
+
+
+    
+
+  </div>
+</div>
+
+<h2 class=" text-center my-5 text-warning">KENNELS</h2>
+
+<div class="container">
+  <div class="row row-cols-2">
+
+    <?php foreach($Kennels as $product) : ?>
+
+      <div class="col d-flex  justify-content-center ">
+
+        <div class="card mb-5 w-50 bg-warning text-white ">
+
+          <img class="p-2" src="<?php echo $product->poster; ?>" class="card-img-top" alt="Category Logo">
+
+          <div class="card-body text-center ">
+
+            <h2 class="mb-4"><?php echo $product->getName(); ?></h2>
+
+            <p>Price: <?php echo $product->price; ?> $ </p>
+            
+
+            <p class="mb-4">Dimensions: <?php echo implode(' x ', $product->dimensions); ?> cm</p>
+
+            
+            <div class="d-flex flex-column align-items-center ">
+
+            <p class="me-1">Category:</p>
+
+            <img class="d-block logoBox" src="<?php echo $product->category_logo; ?>" alt="<?php echo $product->category_name; ?>">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    <?php endforeach; ?>
+
+
+    
+
   </div>
 </div>
 
